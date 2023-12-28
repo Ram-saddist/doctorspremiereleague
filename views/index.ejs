@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> DOCTORS PREMIER LEAGUE</title>
+    <link rel="icon" href="league image.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Muli" />
+    <style>
+        body {
+            margin: 0%;
+            /* background: url(league\ image.jpg) center/cover no-repeat fixed; */
+        }
+
+        label {
+            font-family: Muli;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .title {
+            color: #ac0401;
+        }
+
+        .register-img {
+            position: fixed;
+            top: 60px
+        }
+
+        @media(max-width:768px) {
+            .register-img {
+                display: none;
+            }
+
+            .title {
+                font-size: 1.4rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="mb-3 title">DOCTORS PREMIER LEAGUE - SEASON 5</h1>
+        <div class="row">
+            <form action="/register" method="post" id="registrationForm" class="col-12 col-md-7"
+                enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Enter first name *</label>
+                    <input placeholder="First Name" type="text" name="fname" class="form-control" id="name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Enter last name *</label>
+                    <input placeholder="Last Name" type="text" name="lname" class="form-control" id="name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email *</label>
+                    <input placeholder="EmailID" type="email" name="email" class="form-control" id="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth *</label>
+                    <input type="date" name="dob" class="form-control" id="dob" required />
+                </div>
+
+                <input type="hidden" name="age" id="calculatedAgeInput" />
+
+                <div>Age is: <span id="showAge"></span></div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone number (to be added in DPL 5 whatsapp group) *</label>
+                    <input type="text" placeholder="Mobile number" name="phone" class="form-control" id="phone"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="hospital" class="form-label">Name of the Hospital associated with *</label>
+                    <input type="text" placeholder="Hospital Name" name="hospital" class="form-control" id="hospital"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="practice_sessions" class="form-label"> I give my consent to keep myself available and
+                        involved for
+                        the mentioned tournament dates and Practice sessions? *</label>
+                    <div class="form-check">
+                        <span class="form-check-label" for="practice_sessions">Yes</span>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="yesRadio" value="Yes">
+                    </div>
+                    <div class="form-check">
+                        <span class="form-check-label" for="practice_sessions">No</span>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="noRadio" value="No">
+                    </div>
+                    <div class="form-check">
+                        <span class="form-check-label" for="practice_sessions">Other</span>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="otherRadio"
+                            value="Other">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="bma_ima" class="form-label"> Are you a member of BMA or IMA* </label>
+                    <div class="form-check">
+                        <span class="form-check-label" for="bma_ima">Yes</span>
+                        <input class="form-check-input" type="radio" name="bma_ima" id="yesBmaIma" value="Yes">
+                    </div>
+                    <div class="form-check">
+                        <span class="form-check-label" for="bma_ima">No</span>
+                        <input class="form-check-input" type="radio" name="bma_ima" id="noBmaIma" value="No">
+                    </div>
+                    <div class="form-check">
+                        <span class="form-check-label" for="bma_ima">Other</span>
+                        <input class="form-check-input" type="radio" name="bma_ima" id="otherBmaIma" value="Other">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tshirt" class="form-label">T-Shirt size (Sports t-shirt) *</label>
+                    <select name="tshirt" class="form-select" id="tshirt" required>
+                        <option value="" disabled selected>Select the size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        <option value="XXXL">XXXL</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="trouser" class="form-label">Trouser size *</label>
+                    <select name="trouser" class="form-select" id="trouser" required>
+                        <option value="" disabled selected>Select the size</option>
+                        <option value="28">28</option>
+                        <option value="30">30</option>
+                        <option value="32">32</option>
+                        <option value="34">34</option>
+                        <option value="36">36</option>
+                        <option value="38">38</option>
+                        <option value="40">40</option>
+                        <option value="42">42</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="number_on_tshirt" class="form-label">Name to be mentioned on the t shirt *</label>
+                    <input type="text" placeholder="Name on Tshirt" class="form-control" name="number_on_tshirt" id="number_on_tshirt" title="Please enter exactly two digits." required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="number_on_tshirt" class="form-label">Number to be mentioned on the t shirt (2 digit number only) *</label>
+                    <input type="text" placeholder="Number on Tshirt" class="form-control" name="number_on_tshirt" id="number_on_tshirt" pattern="^\d{2}$" title="Please enter exactly two digits." required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-check-label" for="previous_seasons">
+                        Previous DPL Seasons Played *
+                    </label>
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="previous_seasons[]" id="dpl1"
+                            value="DPL 1 - Vijayawada Club"> DPL 1 - Vijayawada Club
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="previous_seasons[]" id="dpl2"
+                            value="DPL 2 - Bloomingdale School"> DPL 2 - Bloomingdale School
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="previous_seasons[]" id="dpl3"
+                            value="DPL 3 - AIMEE School"> DPL 3 - AIMEE School
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="previous_seasons[]" id="dpl4"
+                            value="DPL 4 - AIIME School"> DPL 4 - AIIME School
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="previous_seasons[]" id="firstTime"
+                            value="Playing DPL for first time"> Playing DPL for the first time
+                    </div>
+                </div>
+
+                (need to attend player assessment sessions on Jan 10th & 11th )*
+
+                <div class="mb-3">
+                    <label class="form-check-label" for="player_profile">
+                        Player profile *
+                    </label>
+                
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="player_profile" id="batsman" value="Batsman" required>
+                        <label class="form-check-label" for="batsman">Batsman</label>
+                    </div>
+                
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="player_profile" id="bowler" value="Bowler" required>
+                        <label class="form-check-label" for="bowler">Bowler</label>
+                    </div>
+                
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="player_profile" id="otherProfile" required>
+                        <label class="form-check-label" for="otherProfile">All Rounder</label>
+                        
+                    </div>
+                </div>
+                
+
+                <div class="mb-3" id="specializedPositionSection">
+                    <label class="form-check-label">If Batsman, any specialized position?</label>
+                    <div>
+                        <input class="form-check-input" type="radio" name="specialized_position" id="topOrder"
+                            value="Top order">
+                        <span class="form-check-label" for="topOrder">Top order</span>
+                    </div>
+
+                    <div>
+                        <input class="form-check-input" type="radio" name="specialized_position" id="middleOrder"
+                            value="Middle order">
+                        <span class="form-check-label" for="middleOrder">Middle order</span>
+                    </div>
+
+                    <div>
+                        <input class="form-check-input" type="radio" name="specialized_position" id="lowerOrder"
+                            value="Lower order">
+                        <span class="form-check-label" for="lowerOrder">Lower order</span>
+                    </div>
+                </div>
+
+                <div class="mb-3" id="typeOfBowlerSection">
+                    <label class="form-check-label" for="type_of_bowler">If Bowler, type of bowler</label>
+
+                    <div>
+                        <input class="form-check-input" type="radio" name="type_of_bowler" id="paceBowler"
+                            value="Pace bowler">
+                        <span class="form-check-label" for="paceBowler">Pace bowler</span>
+                    </div>
+
+                    <div>
+                        <input class="form-check-input" type="radio" name="type_of_bowler" id="mediumPacer"
+                            value="Medium pacer">
+                        <span class="form-check-label" for="mediumPacer">Medium pacer</span>
+                    </div>
+
+                    <div>
+                        <input class="form-check-input" type="radio" name="type_of_bowler" id="legSpinner"
+                            value="Leg Spinner">
+                        <span class="form-check-label" for="legSpinner">Leg Spinner</span>
+                    </div>
+
+                    <div>
+                        <input class="form-check-input" type="radio" name="type_of_bowler" id="offSpin"
+                            value="Off spin">
+                        <span class="form-check-label" for="offSpin">Off spin</span>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-check-label" for="typeOfPayment">
+                        Type of payment *
+                    </label>
+                    <div>
+                        <input class="form-check-input" type="radio" name="typeOfPayment" id="bankTransfer"
+                            value="Bank transfer"> Bank transfer
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="typeOfPayment" id="gpayPaytmPhonePe"
+                            value="Gpay/PayTM/PhonePe"> Gpay/PayTM/PhonePe
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="typeOfPayment" id="cash" value="Cash"> Cash
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="fileUploadPhoto">Please upload your photo (for auction)</label>
+                    <input type="file" class="form-control" id="fileUploadPhoto" name="fileUploadPhoto"
+                        accept="image/*">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-check-label" for="dietaryRestrictions">
+                        Dietary restrictions *
+                    </label>
+                    <div>
+                        <input class="form-check-input" type="radio" name="dietaryRestrictions" id="vegetarian"
+                            value="Vegetarian"> Vegetarian
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="dietaryRestrictions" id="nonVegetarian"
+                            value="Non-vegetarian"> Non-vegetarian
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="transaction_id" class="form-label">Transaction id *</label>
+                    <input type="text" placeholder="Transaction ID" class="form-control" id="transaction_id"
+                        name="transaction_id" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fileUploadPayment">Please upload payment receipt - Rs. 4500/-</label>
+                    <input type="file" class="form-control" id="fileUploadPayment" name="fileUploadPayment"
+                        accept="image/*">
+                </div>
+
+                <div class="form-text mb-3 text-primary">
+                    <label>
+                        A copy of your responses will be emailed to the address you provided.
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary mb-4">Submit</button>
+            </form>
+            <div class="col-12 col-md-5">
+                <img class="register-img" src="register.png" alt="register image" width="500px" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const firstTimeCheckbox = document.getElementById('firstTime');
+        const otherCheckboxes = document.querySelectorAll('[name="previous_seasons[]"]:not(#firstTime)');
+
+        firstTimeCheckbox.addEventListener('change', function () {
+            if (this.checked) {
+                // If "Playing DPL for the first time" is checked, disable and uncheck other checkboxes
+                otherCheckboxes.forEach(function (checkbox) {
+                    checkbox.disabled = true;
+                    checkbox.checked = false;
+                });
+            } else {
+                // If "Playing DPL for the first time" is unchecked, enable other checkboxes
+                otherCheckboxes.forEach(function (checkbox) {
+                    checkbox.disabled = false;
+                });
+            }
+        });
+    });
+</script>
+    </script>
+    <script>
+        function calculateAge(birthDate) {
+            const today = new Date();
+            const dob = new Date(birthDate);
+            let age = today.getFullYear() - dob.getFullYear();
+            // Check if the birthday has occurred this year
+            if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const dobInput = document.getElementById('dob');
+            const calculatedAgeInput = document.getElementById('calculatedAgeInput');
+            dobInput.addEventListener('change', function () {
+                const selectedDate = this.value;
+                const parsedDate = new Date(selectedDate).toISOString().split('T')[0];
+                const age = calculateAge(parsedDate);
+                console.log("calculated age and selected date", selectedDate, age)
+                calculatedAgeInput.value = age;
+                document.getElementById("showAge").innerHTML = age
+            });
+        });
+
+    </script>
+
+    <!--<script>
+        var otherBowlerRadio = document.getElementById("otherBowler");
+        var otherBowlerText = document.getElementById("otherBowlerText");
+
+        otherBowlerRadio.addEventListener("change", function () {
+            otherBowlerText.style.display = this.checked ? "inline-block" : "none";
+            if (!this.checked) {
+                otherBowlerText.value = ""; // Clear the input field when "Other" is unchecked
+            }
+        });
+        var otherPositionRadio = document.getElementById("otherPosition");
+        var otherPositionText = document.getElementById("otherPositionText");
+
+        otherPositionRadio.addEventListener("change", function () {
+            otherPositionText.style.display = this.checked ? "inline-block" : "none";
+            if (!this.checked) {
+                otherPositionText.value = ""; // Clear the input field when "Other" is unchecked
+            }
+        });
+        var otherPaymentRadio = document.getElementById("otherPayment");
+        var otherPaymentText = document.getElementById("otherPaymentText");
+
+        otherPaymentRadio.addEventListener("change", function() {
+            otherPaymentText.style.display = this.checked ? "inline-block" : "none";
+            if (!this.checked) {
+                otherPaymentText.value = ""; // Clear the input field when "Other" is unchecked
+            }
+        });
+    </script>-->
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
