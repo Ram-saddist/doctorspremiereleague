@@ -20,12 +20,14 @@ mongoose.connect("mongodb+srv://sivaram:sivaram@cluster0.0u7y0h0.mongodb.net/doc
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const uploadDir = path.join(__dirname, 'uploads');
+        console.log(uploadDir,"upload dir path")
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir);
         }
         cb(null, uploadDir);
     },
     filename: function (req, file, cb) {
+        console.log("file path",file.fieldname + '-' + Date.now() + path.extname(file.originalname))
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
