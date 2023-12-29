@@ -1,0 +1,102 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes zoomOut {
+            0% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes increaseSize {
+            0% { font-size: 0.9em; }
+            50% { font-size: 1.2em; }
+            100% { font-size: 0.9em; }
+        }
+
+        a.blink-zoom {
+            text-decoration: underline;
+            color: red !important; /* Change the color as needed */
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: #f0f0f0; /* Cloud color */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Cloud shadow */
+            animation: blink 4.5s infinite, zoomIn 4.5s infinite, increaseSize 4.5s infinite;
+        }
+    </style>
+    <title>Blinking, Zooming, and Increasing Size Link</title>
+</head>
+<body>
+    <p>This is a <a href="#" class="blink-zoom">blinking, zooming in, and increasing size link</a>.</p>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions</title>
+    <style>
+        #proceedButton{
+            background-color:green;
+            color: white;
+            padding:5px;
+            border: none;
+            cursor: pointer;
+        }
+      
+    </style>
+</head>
+<body>
+    <h1>December 31st - Launch of Doctors Premier League 5</h1>
+    <ul>
+        <li>Jan 1st - 7th: Registration of players starts</li>
+        <li>Jan 10, 11: Players assessment</li>
+        <li>Jan 20th: DPL 5 Auction</li>
+        <li>Feb 3rd to 8th: Warm-up matches</li>
+        <li>Feb 10th: Inauguration of DPL 5</li>
+        <li>Feb 11th to 18th: DPL tournament</li>
+    </ul>
+    <h1>Terms & Conditions</h1>
+    <form id="termsForm">
+        <ul>
+            <li>The player should make himself available for all the matches including the practice matches</li>
+            <li>All the new players who are playing DPL for the 1st time should attend the player assessment compulsorily. Failing which his participation shall be canceled</li>
+            <li>All the players are requested to make themselves available on all the mentioned dates like player auction and enjoy the fellowship.</li>
+            <li>The players are also obliged to attend the practice sessions organized by the franchise owners.</li>
+            <li>Any discrepancies shall be taken up to the disciplinary committee</li>
+        </ul>
+        <input type="checkbox" id="acceptTerms"> <label for="acceptTerms">Accept the terms and conditions to get Registered</label>
+        <button id="proceedButton" disabled> Regsiter Now</button>
+    </form>
+    
+    
+
+    <script>
+        var acceptTermsCheckbox = document.getElementById("acceptTerms");
+        var proceedButton = document.getElementById("proceedButton");
+
+        acceptTermsCheckbox.addEventListener("change", function() {
+            proceedButton.disabled = !this.checked;
+        });
+
+        proceedButton.addEventListener("click", function() {
+            // Redirect to another page using an anchor tag
+            window.location.href = "another-page.html"; // Replace with your desired page URL
+        });
+    </script>
+</body>
+</html>

@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-// Define the schema for the registration data
 const registrationSchema = new mongoose.Schema({
     fname: String,
     lname:String,
@@ -19,6 +17,7 @@ const registrationSchema = new mongoose.Schema({
     playerProfile: String,
     specializedPosition: String,
     typeOfBowler: String,
+    crichero:String,
     fileUploadPhoto: String,
     fileUploadPayment: String,
     dietaryRestrictions: String,

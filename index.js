@@ -7,7 +7,6 @@ const app = express();
 const port = 3000;
 const Registration = require('./models/registrationModel');
 const nodemailer = require('nodemailer');
-
 mongoose.connect("mongodb+srv://sivaram:sivaram@cluster0.0u7y0h0.mongodb.net/doctorspremierleague?retryWrites=true&w=majority")
     .then(() => {
         console.log("database connected successfully")
@@ -16,7 +15,6 @@ mongoose.connect("mongodb+srv://sivaram:sivaram@cluster0.0u7y0h0.mongodb.net/doc
         console.log(error)
     })
 
-// Set up storage for multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const uploadDir = path.join(__dirname, 'uploads');
@@ -31,13 +29,10 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
-
 const upload = multer({ storage: storage });
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Set EJS as the view engine
 app.set('view engine', 'ejs');
 // Serve static files (like CSS, images, etc.) from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -46,8 +41,16 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Define a route to render the registration form
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('home');
 });
+
+app.get("/index",(req,res)=>{
+    res.render("index")
+})
+
+app.get("/termsdpl",(req,res)=>{
+    res.render("termsdpl")
+})
 
 // Define a route to handle form submission with file uploads
 app.post('/register', upload.fields([
@@ -76,14 +79,13 @@ app.post('/register', upload.fields([
         playerProfile: req.body.player_profile,
         specializedPosition: req.body.specialized_position,
         typeOfBowler: req.body.type_of_bowler,
+        crichero:req.body.crichero,
         fileUploadPhoto: fileUploadPhoto ? '/uploads/' + fileUploadPhoto[0].filename : null,
         fileUploadPayment: fileUploadPayment ? '/uploads/' + fileUploadPayment[0].filename : null,
         dietaryRestrictions: req.body.dietaryRestrictions,
         typeOfPayment: req.body.typeOfPayment,
         transactionId: req.body.transaction_id,
     };
-
-    //Save formData to MongoDB
     try {
         const registration = new Registration(formData);
         await registration.save();
@@ -94,7 +96,7 @@ app.post('/register', upload.fields([
     }
 });
 
-app.get('/users', async (req, res) => {
+app.get('/dashboard', async (req, res) => {
     try {
         // Retrieve all registrations from MongoDB
         const registrations = await Registration.find();
@@ -193,40 +195,3 @@ app.post('/confirm-email/:email', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-
-
-// const express = require('express');
-// const path = require('path');
-// const mongoose = require("mongoose")
-// const app = express();
-// const port = 8080;
-// const Registration = require('./models/registrationModel');
-
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
-// // Set EJS as the view engine
-// app.set('view engine', 'ejs');
-// // Serve static files (like CSS, images, etc.) from the "public" directory
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// mongoose.connect("mongodb+srv://sivaram:sivaram@cluster0.0u7y0h0.mongodb.net/doctorspremierleague?retryWrites=true&w=majority")
-//     .then(() => {
-//         console.log("database connected successfully")
-//     })
-//     .catch((error)=>{
-//         console.log(error)
-//     })
-
-// // Define a route to render the registration form
-// app.get('/', (req, res) => {
-//     res.render('index');
-// });
-
-
-
-// // Start the server
-// app.listen(port, () => {
-//     console.log(`Server is running on http://localhost:${port}`);
-// });
