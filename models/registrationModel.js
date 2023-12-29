@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 const registrationSchema = new mongoose.Schema({
+    registrationNumber: {
+        type: Number,
+        required: true,
+        unique: true,
+        default: 5001,
+    },
     fname: String,
     lname:String,
     email: String,

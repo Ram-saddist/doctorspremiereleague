@@ -59,13 +59,13 @@ app.post('/register', upload.fields([
 ]), async (req, res) => {
     // Access uploaded files using req.files
     const { fileUploadPhoto, fileUploadPayment } = req.files;
-    console.log("from /register route", req.body)
+
     // Use req.body to access other form fields
     const formData = {
         fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
-        dob:req.body.dob,
+        dob: req.body.dob,
         age: req.body.age,
         phone: req.body.phone,
         hospital: req.body.hospital,
@@ -79,22 +79,74 @@ app.post('/register', upload.fields([
         playerProfile: req.body.player_profile,
         specializedPosition: req.body.specialized_position,
         typeOfBowler: req.body.type_of_bowler,
-        crichero:req.body.crichero,
+        crichero: req.body.crichero,
         fileUploadPhoto: fileUploadPhoto ? '/uploads/' + fileUploadPhoto[0].filename : null,
         fileUploadPayment: fileUploadPayment ? '/uploads/' + fileUploadPayment[0].filename : null,
         dietaryRestrictions: req.body.dietaryRestrictions,
         typeOfPayment: req.body.typeOfPayment,
         transactionId: req.body.transaction_id,
     };
+
     try {
+        // Retrieve the latest registration number from the database
+        const latestRegistration = await Registration.findOne({}, {}, { sort: { 'registrationNumber': -1 } });
+        const latestRegistrationNumber = latestRegistration ? latestRegistration.registrationNumber : 5000;
+
+        // Increment the registration number and save the data
+        formData.registrationNumber = latestRegistrationNumber + 1;
         const registration = new Registration(formData);
         await registration.save();
+
         res.render('successpage');
     } catch (error) {
         console.error(error);
         //res.status(500).send('Internal Server Error');
     }
 });
+
+
+// app.post('/register', upload.fields([
+//     { name: 'fileUploadPhoto', maxCount: 1 },
+//     { name: 'fileUploadPayment', maxCount: 1 }
+// ]), async (req, res) => {
+//     // Access uploaded files using req.files
+//     const { fileUploadPhoto, fileUploadPayment } = req.files;
+//     console.log("from /register route", req.body)
+//     // Use req.body to access other form fields
+//     const formData = {
+//         fname: req.body.fname,
+//         lname: req.body.lname,
+//         email: req.body.email,
+//         dob:req.body.dob,
+//         age: req.body.age,
+//         phone: req.body.phone,
+//         hospital: req.body.hospital,
+//         consent: req.body.flexRadioDefault,
+//         bmaIma: req.body.bma_ima,
+//         tshirtSize: req.body.tshirt,
+//         trouserSize: req.body.trouser,
+//         nameOnTshirt: req.body.name_on_tshirt,
+//         numberOnTshirt: req.body.number_on_tshirt,
+//         previousSeasons: req.body.previous_seasons,
+//         playerProfile: req.body.player_profile,
+//         specializedPosition: req.body.specialized_position,
+//         typeOfBowler: req.body.type_of_bowler,
+//         crichero:req.body.crichero,
+//         fileUploadPhoto: fileUploadPhoto ? '/uploads/' + fileUploadPhoto[0].filename : null,
+//         fileUploadPayment: fileUploadPayment ? '/uploads/' + fileUploadPayment[0].filename : null,
+//         dietaryRestrictions: req.body.dietaryRestrictions,
+//         typeOfPayment: req.body.typeOfPayment,
+//         transactionId: req.body.transaction_id,
+//     };
+//     try {
+//         const registration = new Registration(formData);
+//         await registration.save();
+//         res.render('successpage');
+//     } catch (error) {
+//         console.error(error);
+//         //res.status(500).send('Internal Server Error');
+//     }
+// });
 
 app.get('/dashboard', async (req, res) => {
     try {

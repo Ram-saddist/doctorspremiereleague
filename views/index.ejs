@@ -326,11 +326,12 @@
                         accept="image/*">
                 </div>
 
-                <div class="form-text mb-3 text-primary">
+                <!-- <div class="form-text mb-3 text-primary">
                     <label>
                         A copy of your responses will be emailed to the address you provided.
                     </label>
-                </div>
+                </div> -->
+
                 <button type="submit" class="btn btn-primary mb-4">Submit</button>
             </form>
             <div class="col-12 col-md-5">
@@ -339,6 +340,84 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Script for handling checkboxes
+            const firstTimeCheckbox = document.getElementById('firstTime');
+            const otherCheckboxes = document.querySelectorAll('[name="previous_seasons[]"]:not(#firstTime)');
+    
+            firstTimeCheckbox.addEventListener('change', function () {
+                if (this.checked) {
+                    // If "Playing DPL for the first time" is checked, disable and uncheck other checkboxes
+                    otherCheckboxes.forEach(function (checkbox) {
+                        checkbox.disabled = true;
+                        checkbox.checked = false;
+                    });
+                } else {
+                    // If "Playing DPL for the first time" is unchecked, enable other checkboxes
+                    otherCheckboxes.forEach(function (checkbox) {
+                        checkbox.disabled = false;
+                    });
+                }
+            });
+    
+            // Script for calculating age
+            function calculateAge(birthDate) {
+                const today = new Date();
+                const dob = new Date(birthDate);
+                let age = today.getFullYear() - dob.getFullYear();
+                
+                // Check if the birthday has occurred this year
+                if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+    
+                return age;
+            }
+    
+            // Script for handling date of birth input
+            const dobInput = document.getElementById('dob');
+            const calculatedAgeInput = document.getElementById('calculatedAgeInput');
+    
+            dobInput.addEventListener('change', function () {
+                const selectedDate = this.value;
+                const parsedDate = new Date(selectedDate).toISOString().split('T')[0];
+                const age = calculateAge(parsedDate);
+    
+                console.log("calculated age and selected date", selectedDate, age)
+                calculatedAgeInput.value = age;
+                document.getElementById("showAge").innerHTML = `current users age is:` + age;
+            });
+    
+            // Script for handling file size validation
+            const fileUploadPhotoInput = document.getElementById('fileUploadPhoto');
+            const fileUploadPaymentInput = document.getElementById('fileUploadPayment');
+    
+            fileUploadPhotoInput.addEventListener('change', function () {
+                validateFileSize(fileUploadPhotoInput);
+            });
+    
+            fileUploadPaymentInput.addEventListener('change', function () {
+                validateFileSize(fileUploadPaymentInput);
+            });
+    
+            function validateFileSize(fileInput) {
+                const maxSize = 5 * 1024 * 1024; // 5 MB
+    
+                if (fileInput.files.length > 0) {
+                    const fileSize = fileInput.files[0].size;
+                    if (fileSize > maxSize) {
+                        alert('File size must be 5 MB or below.');
+                        fileInput.value = ''; // Clear the input to prevent submission
+                    }
+                }
+            }
+        });
+    </script>
+    
+
+
+<!--
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const firstTimeCheckbox = document.getElementById('firstTime');
@@ -360,7 +439,7 @@
             });
         });
     </script>
-    </script>
+
     <script>
         function calculateAge(birthDate) {
             const today = new Date();
@@ -385,38 +464,8 @@
                 document.getElementById("showAge").innerHTML = `current users age is:` + age
             });
         });
-
     </script>
-
-    <!--<script>
-        var otherBowlerRadio = document.getElementById("otherBowler");
-        var otherBowlerText = document.getElementById("otherBowlerText");
-
-        otherBowlerRadio.addEventListener("change", function () {
-            otherBowlerText.style.display = this.checked ? "inline-block" : "none";
-            if (!this.checked) {
-                otherBowlerText.value = ""; // Clear the input field when "Other" is unchecked
-            }
-        });
-        var otherPositionRadio = document.getElementById("otherPosition");
-        var otherPositionText = document.getElementById("otherPositionText");
-
-        otherPositionRadio.addEventListener("change", function () {
-            otherPositionText.style.display = this.checked ? "inline-block" : "none";
-            if (!this.checked) {
-                otherPositionText.value = ""; // Clear the input field when "Other" is unchecked
-            }
-        });
-        var otherPaymentRadio = document.getElementById("otherPayment");
-        var otherPaymentText = document.getElementById("otherPaymentText");
-
-        otherPaymentRadio.addEventListener("change", function() {
-            otherPaymentText.style.display = this.checked ? "inline-block" : "none";
-            if (!this.checked) {
-                otherPaymentText.value = ""; // Clear the input field when "Other" is unchecked
-            }
-        });
-    </script>-->
+-->
 
 
 
