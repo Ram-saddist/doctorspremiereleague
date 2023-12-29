@@ -23,10 +23,13 @@ const registrationSchema = new mongoose.Schema({
     playerProfile: String,
     specializedPosition: String,
     typeOfBowler: String,
-    crichero:String,
+    crichero:{
+        type: String,
+        required: false,
+        default: "",
+    },
     fileUploadPhoto: String,
     fileUploadPayment: String,
-    dietaryRestrictions: String,
     typeOfPayment: String,
     transactionId: String,
 });

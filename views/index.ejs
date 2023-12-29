@@ -57,12 +57,12 @@
             <form action="/register" method="post" id="registrationForm" class="col-12 col-md-7"
                 enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Enter first name *</label>
+                    <label for="name" class="form-label">First name *</label>
                     <input placeholder="First Name" type="text" name="fname" class="form-control" id="name" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Enter last name *</label>
+                    <label for="name" class="form-label">Last name *</label>
                     <input placeholder="Last Name" type="text" name="lname" class="form-control" id="name" required>
                 </div>
 
@@ -162,10 +162,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="number_on_tshirt" class="form-label">Number to be mentioned on the t shirt (2 digit
-                        number only) *</label>
+                    <label for="number_on_tshirt" class="form-label">Number to be mentioned on the t shirt (1 or 2 digits) *</label>
                     <input type="text" placeholder="Number on Tshirt" class="form-control" name="number_on_tshirt"
-                        id="number_on_tshirt" pattern="^\d{2}$" title="Please enter exactly two digits." required>
+                        id="number_on_tshirt" pattern="^\d{1,2}$" title="Please enter 1 or 2 digits." required>
                 </div>
 
                 <div class="mb-3">
@@ -194,8 +193,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="mb-3">
                     <label class="form-check-label" for="player_profile">
                         Player profile *
@@ -219,7 +216,6 @@
 
                     </div>
                 </div>
-
 
                 <div class="mb-3" id="specializedPositionSection">
                     <label class="form-check-label">If Batsman, any specialized position?</label>
@@ -271,10 +267,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Mention cricheros user ID * (not a user mention the phone
+                    <label for="name" class="form-label">Mention cricheros user ID (not a user mention the phone
                         number to be attached)</label>
                     <input placeholder="Cricheros userID" type="text" name="crichero" class="form-control" id="crichero"
-                        required>
+                        >
                 </div>
 
                 <div class="mb-3">
@@ -294,24 +290,10 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-3">
+                <div class="mb-3">
                     <label for="fileUploadPhoto">Please upload your photo (for auction)</label>
                     <input type="file" class="form-control" id="fileUploadPhoto" name="fileUploadPhoto"
                         accept="image/*">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-check-label" for="dietaryRestrictions">
-                        Dietary restrictions *
-                    </label>
-                    <div>
-                        <input class="form-check-input" type="radio" name="dietaryRestrictions" id="vegetarian"
-                            value="Vegetarian"> Vegetarian
-                    </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="dietaryRestrictions" id="nonVegetarian"
-                            value="Non-vegetarian"> Non-vegetarian
-                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -320,10 +302,15 @@
                         name="transaction_id" required>
                 </div>
 
+                <!-- <div class="mb-3">
+                    <label for="transaction_date" class="form-label">Transaction Date *</label>
+                    <input type="text" name="transaction_date" class="form-control" id="transaction_date" required />
+                </div> -->
+
                 <div class="mb-3">
-                    <label for="fileUploadPayment">Please upload payment receipt - Rs. 4500/-</label>
+                    <label for="fileUploadPayment">Please upload payment receipt - Rs. 4500/- *</label>
                     <input type="file" class="form-control" id="fileUploadPayment" name="fileUploadPayment"
-                        accept="image/*">
+                        accept="image/*" required/>
                 </div>
 
                 <!-- <div class="form-text mb-3 text-primary">
