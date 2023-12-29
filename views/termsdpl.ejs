@@ -30,15 +30,18 @@
         #registerNowLink.enabled {
             cursor: pointer;
         }
-        li{
+
+        li {
             text-align: justify;
         }
-        #termsForm{
+
+        #termsForm {
             display: flex;
             align-items: center;
         }
-        @media(max-width:768px){
-            #termsForm{
+
+        @media(max-width:768px) {
+            #termsForm {
                 flex-direction: column;
                 align-items: flex-start;
             }
@@ -52,10 +55,10 @@
             <div class="col-lg-6 col-md-12">
                 <h1 class="mb-4">Schedule</h1>
                 <p>Dec 31st - Launch of Doctors Premier League 5</p>
-                <p>Jan 1st - 7th: Registration of players starts</p>
-                <p>Jan 10, 11: Players assessment</p>
+                <p>Jan 1st - 7th: Registration of players</p>
+                <p>Jan 10, 11: Players assessment (mandatory for new players)</p>
                 <p>Jan 20th: DPL 5 Auction</p>
-                <p>Feb 3rd to 8th: Warm-up matches</p>
+                <p>Feb 3rd to 8th: Warm-up matches & Team Bonding</p>
                 <p>Feb 10th: Inauguration of DPL 5</p>
                 <p>Feb 11th to 18th: DPL tournament</p>
             </div>
@@ -79,8 +82,14 @@
     <div class="container">
         <div class="row">
             <form id="termsForm">
-               <p> <a id="registerNowLink" class="bg-success text-light p-2 me-lg-5" href="/index" class="enabled" onclick="checkAcceptance()">Register Now</a></p>
-              <p><input class="my-3" type="checkbox" id="acceptTerms"> <label for="acceptTerms">Accept the terms and conditions to get Registered</label></p>
+                <p> <a id="registerNowLink" class="bg-success text-light p-2 me-lg-5" href="/index" class="enabled"
+                        onclick="checkAcceptance()">Register Now</a></p>
+                <p>
+                    <input class="my-3" type="checkbox" id="acceptTerms"> 
+                    <label for="acceptTerms">I accept the above terms & conditions</label><br>
+                    <input class="my-3" type="checkbox" id="ima_bma"/>
+                    <label for="acceptTerms">I am a member of IMA/BMA(if not please apply immediately to participate in DPL) </label>
+                </p>
             </form>
         </div>
     </div>
