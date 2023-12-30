@@ -85,6 +85,7 @@ app.post('/register', upload.fields([
         dietaryRestrictions: req.body.dietaryRestrictions,
         typeOfPayment: req.body.typeOfPayment,
         transactionId: req.body.transaction_id,
+        transaction_date:req.body.transaction_date
     };
 
     try {
@@ -105,49 +106,6 @@ app.post('/register', upload.fields([
 });
 
 
-// app.post('/register', upload.fields([
-//     { name: 'fileUploadPhoto', maxCount: 1 },
-//     { name: 'fileUploadPayment', maxCount: 1 }
-// ]), async (req, res) => {
-//     // Access uploaded files using req.files
-//     const { fileUploadPhoto, fileUploadPayment } = req.files;
-//     console.log("from /register route", req.body)
-//     // Use req.body to access other form fields
-//     const formData = {
-//         fname: req.body.fname,
-//         lname: req.body.lname,
-//         email: req.body.email,
-//         dob:req.body.dob,
-//         age: req.body.age,
-//         phone: req.body.phone,
-//         hospital: req.body.hospital,
-//         consent: req.body.flexRadioDefault,
-//         bmaIma: req.body.bma_ima,
-//         tshirtSize: req.body.tshirt,
-//         trouserSize: req.body.trouser,
-//         nameOnTshirt: req.body.name_on_tshirt,
-//         numberOnTshirt: req.body.number_on_tshirt,
-//         previousSeasons: req.body.previous_seasons,
-//         playerProfile: req.body.player_profile,
-//         specializedPosition: req.body.specialized_position,
-//         typeOfBowler: req.body.type_of_bowler,
-//         crichero:req.body.crichero,
-//         fileUploadPhoto: fileUploadPhoto ? '/uploads/' + fileUploadPhoto[0].filename : null,
-//         fileUploadPayment: fileUploadPayment ? '/uploads/' + fileUploadPayment[0].filename : null,
-//         dietaryRestrictions: req.body.dietaryRestrictions,
-//         typeOfPayment: req.body.typeOfPayment,
-//         transactionId: req.body.transaction_id,
-//     };
-//     try {
-//         const registration = new Registration(formData);
-//         await registration.save();
-//         res.render('successpage');
-//     } catch (error) {
-//         console.error(error);
-//         //res.status(500).send('Internal Server Error');
-//     }
-// });
-
 app.get('/dashboard', async (req, res) => {
     try {
         // Retrieve all registrations from MongoDB
@@ -163,6 +121,14 @@ app.get('/dashboard', async (req, res) => {
 app.post('/confirm-email/:email', async (req, res) => {
     const email = req.params.email;
     try {
+        const userRegistration = await Registration.findOne({ email });
+        
+        if (!userRegistration) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const registrationNumber = userRegistration.registrationNumber;
+
         // Generate a random OTP (e.g., a 6-digit number)
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -177,45 +143,48 @@ app.post('/confirm-email/:email', async (req, res) => {
 
 
         const text = `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Registration Confirmation</title>
-          <style>
-              body {
-                  font-family: Arial, sans-serif;
-                  margin: 0 auto;
-                  max-width: 600px;
-                  padding: 20px;
-                  background-color: rgba(206, 238, 255, 0.5);
-              }
-              h1 {
-                  text-align: center;
-              }
-              img {
-                  display: block;
-                  margin: 0 auto;
-                  max-width: 100%;
-              }
-              .otp {
-                  color: #323596;
-                  font-weight: bold;
-                  font-size: 30px;
-              }
-          </style>
-      </head>
-      <body>
-          <h1>Welcome to Doctors Premier League</h1>
-          <p>Greetings from Doctors Premier League We are thrilled to have received your
-              request. We are accepting your request for the booking.
-          </p>
-          
-          <p>Warm regards,</p>
-          <p>Doctors Premier League</p>
-      </body>
-      </html>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Registration Confirmation</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0 auto;
+                    max-width: 600px;
+                    padding: 20px;
+                    background-color: rgba(206, 238, 255, 0.5);
+                }
+                h1 {
+                    text-align: center;
+                }
+                img {
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 100%;
+                }
+                .otp {
+                    color: #323596;
+                    font-weight: bold;
+                    font-size: 30px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Welcome to Doctors Premier League Season 5</h1>
+            <p>Greetings from Doctors Premier League! We are thrilled to have received your registration. We hereby confirm your registration, and your registration ID is <span class="otp">DPL${registrationNumber}</span>.</p>
+        
+            <p>New Players assessment: Jan 10 and 11</p>
+            <p>Tournament days: Feb 11 - 18</p>
+            <p>Enjoy the Fun and Fellowship</p>
+        
+            <p>Warm regards,</p>
+            <p>Organizing Committee</p>
+        </body>
+        </html>
+        
         `
         const mailOptions = {
             from: "sivaram@codegnan.com", // Sender address
@@ -235,8 +204,6 @@ app.post('/confirm-email/:email', async (req, res) => {
             }
         });
 
-        // Send the generated OTP back to the frontend as JSON
-        res.status(200).json({ generatedOTP: otp });
     } catch (error) {
         console.log("An error occurred while sending the email.");
     }

@@ -162,7 +162,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="number_on_tshirt" class="form-label">Number to be mentioned on the t shirt (1 or 2 digits) *</label>
+                    <label for="number_on_tshirt" class="form-label">Number to be mentioned on the t shirt (1 or 2
+                        digits) *</label>
                     <input type="text" placeholder="Number on Tshirt" class="form-control" name="number_on_tshirt"
                         id="number_on_tshirt" pattern="^\d{1,2}$" title="Please enter 1 or 2 digits." required>
                 </div>
@@ -269,8 +270,8 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Mention cricheros user ID (not a user mention the phone
                         number to be attached)</label>
-                    <input placeholder="Cricheros userID" type="text" name="crichero" class="form-control" id="crichero"
-                        >
+                    <input placeholder="Cricheros userID" type="text" name="crichero" class="form-control"
+                        id="crichero">
                 </div>
 
                 <div class="mb-3">
@@ -302,15 +303,25 @@
                         name="transaction_id" required>
                 </div>
 
-                <!-- <div class="mb-3">
+                <div class="mb-3">
                     <label for="transaction_date" class="form-label">Transaction Date *</label>
                     <input type="text" name="transaction_date" class="form-control" id="transaction_date" required />
-                </div> -->
+                </div>
+
+                <div class="mb-3">
+                    <h2>Payment Account Details</h2>
+                    <p>Name: Doctors Cricket Association</p>
+                   <p> Bank: HDFC Bank</p>
+                    <p>Account number: 50200048326653</p>
+                   <p> IFSC Code: HDFC0001456</p>
+
+                    <p>Please Acknowledge Dr. Y. Bhavan Chand 9032229707</p>
+                </div>
 
                 <div class="mb-3">
                     <label for="fileUploadPayment">Please upload payment receipt - Rs. 4500/- *</label>
                     <input type="file" class="form-control" id="fileUploadPayment" name="fileUploadPayment"
-                        accept="image/*" required/>
+                        accept="image/*" required />
                 </div>
 
                 <!-- <div class="form-text mb-3 text-primary">
@@ -332,7 +343,7 @@
             // Script for handling checkboxes
             const firstTimeCheckbox = document.getElementById('firstTime');
             const otherCheckboxes = document.querySelectorAll('[name="previous_seasons[]"]:not(#firstTime)');
-    
+
             firstTimeCheckbox.addEventListener('change', function () {
                 if (this.checked) {
                     // If "Playing DPL for the first time" is checked, disable and uncheck other checkboxes
@@ -347,50 +358,50 @@
                     });
                 }
             });
-    
+
             // Script for calculating age
             function calculateAge(birthDate) {
                 const today = new Date();
                 const dob = new Date(birthDate);
                 let age = today.getFullYear() - dob.getFullYear();
-                
+
                 // Check if the birthday has occurred this year
                 if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
                     age--;
                 }
-    
+
                 return age;
             }
-    
+
             // Script for handling date of birth input
             const dobInput = document.getElementById('dob');
             const calculatedAgeInput = document.getElementById('calculatedAgeInput');
-    
+
             dobInput.addEventListener('change', function () {
                 const selectedDate = this.value;
                 const parsedDate = new Date(selectedDate).toISOString().split('T')[0];
                 const age = calculateAge(parsedDate);
-    
+
                 console.log("calculated age and selected date", selectedDate, age)
                 calculatedAgeInput.value = age;
                 document.getElementById("showAge").innerHTML = `current users age is:` + age;
             });
-    
+
             // Script for handling file size validation
             const fileUploadPhotoInput = document.getElementById('fileUploadPhoto');
             const fileUploadPaymentInput = document.getElementById('fileUploadPayment');
-    
+
             fileUploadPhotoInput.addEventListener('change', function () {
                 validateFileSize(fileUploadPhotoInput);
             });
-    
+
             fileUploadPaymentInput.addEventListener('change', function () {
                 validateFileSize(fileUploadPaymentInput);
             });
-    
+
             function validateFileSize(fileInput) {
                 const maxSize = 5 * 1024 * 1024; // 5 MB
-    
+
                 if (fileInput.files.length > 0) {
                     const fileSize = fileInput.files[0].size;
                     if (fileSize > maxSize) {
@@ -401,10 +412,10 @@
             }
         });
     </script>
-    
 
 
-<!--
+
+    <!--
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const firstTimeCheckbox = document.getElementById('firstTime');
