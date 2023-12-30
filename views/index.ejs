@@ -104,11 +104,7 @@
                         <span class="form-check-label" for="practice_sessions">No</span>
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="noRadio" value="No">
                     </div>
-                    <div class="form-check">
-                        <span class="form-check-label" for="practice_sessions">Other</span>
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="otherRadio"
-                            value="Other">
-                    </div>
+                    
                 </div>
 
                 <div class="mb-3">
@@ -120,10 +116,6 @@
                     <div class="form-check">
                         <span class="form-check-label" for="bma_ima">No</span>
                         <input class="form-check-input" type="radio" name="bma_ima" id="noBmaIma" value="No">
-                    </div>
-                    <div class="form-check">
-                        <span class="form-check-label" for="bma_ima">Other</span>
-                        <input class="form-check-input" type="radio" name="bma_ima" id="otherBmaIma" value="Other">
                     </div>
                 </div>
 
@@ -212,10 +204,15 @@
                     </div>
 
                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="player_profile" id="keeper" required>
+                        <label class="form-check-label" for="keeper">Keeper</label>
+                    </div>
+
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="player_profile" id="otherProfile" required>
                         <label class="form-check-label" for="otherProfile">All Rounder</label>
-
-                    </div>
+                    </div>                    
+                    
                 </div>
 
                 <div class="mb-3" id="specializedPositionSection">
@@ -237,6 +234,42 @@
                             value="Lower order">
                         <span class="form-check-label" for="lowerOrder">Lower order</span>
                     </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-check-label" for="type_of_batsmen">
+                        Type of Batsmen *
+                    </label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type_of_batsmen" id="batsman" value="Batsman"
+                            required>
+                        <label class="form-check-label" for="lefthand">Left Hand</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type_of_batsmen" id="bowler" value="Bowler"
+                            required>
+                        <label class="form-check-label" for="righthand">Right Hand</label>
+                    </div>                    
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-check-label" for="hitter">
+                        Type hitter *
+                    </label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="hitter" id="batsman" value="Batsman"
+                            required>
+                        <label class="form-check-label" for="lefthand">Hard Hitter</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="hitter" id="bowler" value="Bowler"
+                            required>
+                        <label class="form-check-label" for="righthand">Accumulator</label>
+                    </div>                    
                 </div>
 
                 <div class="mb-3" id="typeOfBowlerSection">
@@ -265,6 +298,24 @@
                             value="Off spin">
                         <span class="form-check-label" for="offSpin">Off spin</span>
                     </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-check-label" for="type_of_bowler_side">
+                        Type of Bowler *
+                    </label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type_of_bowler_side" id="batsman" value="Batsman"
+                            required>
+                        <label class="form-check-label" for="lefthand">Left Hand</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type_of_bowler_side" id="bowler" value="Bowler"
+                            required>
+                        <label class="form-check-label" for="righthand">Right Hand</label>
+                    </div>                    
                 </div>
 
                 <div class="mb-3">
@@ -315,11 +366,11 @@
                     <p>Account number: 50200048326653</p>
                    <p> IFSC Code: HDFC0001456</p>
 
-                    <p>Please Acknowledge Dr. Y. Bhavan Chand 9032229707</p>
+                    <p>Please Acknowledge Dr. Y. Bhavan Chand 9032229707 and Dr. Anuroop 89770 30023</p>
                 </div>
 
                 <div class="mb-3">
-                    <label for="fileUploadPayment">Please upload payment receipt - Rs. 4500/- *</label>
+                    <label for="fileUploadPayment">Upload payment screenshot - Rs. 4500/- *</label>
                     <input type="file" class="form-control" id="fileUploadPayment" name="fileUploadPayment"
                         accept="image/*" required />
                 </div>

@@ -21,13 +21,28 @@
         .card {
             background-color: aliceblue;
         }
+
+        .dboard {
+            display: flex;
+        }
+
+        @media(max-width:576px) {
+            .dboard {
+                flex-direction: column;
+            }
+            .btn-success{
+                width:fit-content
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container p-4 p-md-0 mt-md-5">
-        <h1 class="m-4">Admin Dashboard</h1>
-
+        <div class="dboard mb-3">
+            <h1 class="me-5">Admin Dashboard</h1>
+            <button class="btn btn-success" onclick="downloadCSV()">Download Details</button>
+        </div>
         <% if (registrations.length> 0) { %>
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <% registrations.forEach(registration=> { %>
@@ -70,7 +85,32 @@
                 <p>No registrations found.</p>
                 <% } %>
     </div>
+    <!--
+        
+       
+
+    -->
     <script>
+
+        function downloadCSV() {
+            // Extract registration details
+            var registrationsData = JSON.parse('<%- JSON.stringify(registrations) %>')
+            console.log(registrationsData)
+            // Create a CSV content 
+            const csvContent = "Registration Number,First Name,Last Name,Email,Date of Birth,Age,Phone,Hospital Name,Consent,BMA/IMA member,T-shirt Size,Trouser Size,Name on t-shirt,Number on t-shirt,Player Profile,Specialized Position for batsmen,Type of Batsmen,Type of hitter,Specialized Position for bowler,Type of Bowler,Crichero userID,Type of Payment,Transaction ID,Transaction Date,Previous Seasons\n"
+                + registrationsData.map(registration => (
+                    `${registration.registrationNumber},${registration.fname},${registration.lname},${registration.email},${registration.dob}${registration.age},'${registration.phone}',${registration.hospital},${registration.consent},${registration.bmaIma},${registration.tshirtSize},${registration.trouserSize},${registration.nameOnTshirt},${registration.numberOnTshirt},${registration.playerProfile},${registration.specializedPosition},${registration.type_of_batsmen},${registration.hitter},${registration.typeOfBowler},${registration.type_of_bowler_side},${registration.crichero},${registration.typeOfPayment},${registration.transactionId},${registration.transaction_date},${registration.previousSeasons}`
+                )).join("\n");
+
+            // Create a Blob containing the CSV data
+            const csvBlob = new Blob([csvContent], { type: "text/csv" });
+
+            // Create a download link and trigger the download
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(csvBlob);
+            link.download = "player_details.csv";
+            link.click();
+        }
         function sendConfirmation(email) {
             fetch(`/confirm-email/${email}`, {
                 method: 'POST'
@@ -80,7 +120,7 @@
                         console.log('Email sent successfully!');
                         alert("Email sent Successfully")
                     } else {
-                        console.error('Error sending email:', response.statusText);
+                        //console.error('Error sending email:', response.statusText);
                     }
                 })
                 .catch(error => {

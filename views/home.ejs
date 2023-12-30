@@ -61,8 +61,6 @@
             justify-content: center;
         }
 
-
-
         .letter {
             text-transform: uppercase;
             background-color: #fff;
@@ -86,6 +84,12 @@
         }
 
         @media (max-width: 768px) {
+
+            .navbar-brand,
+            .navbar-nav {
+                margin-left: 0% !important;
+            }
+
             .ground-highlight-images {
                 flex-direction: column;
                 /* Change to a column layout on mobile screens */
@@ -144,8 +148,7 @@
         }
 
         a.blink-zoom {
-            text-decoration: underline;
-            color: whitesmoke !important; /* Change the color as needed */
+            color: whitesmoke !important; 
             animation: blink 4.5s infinite, zoomIn 4.5s infinite, increaseSize 4.5s infinite;
         }
         /* zoom effect ends */
@@ -185,6 +188,21 @@
         }
 
         @media (max-width:576px) {
+            .mobile-title {
+                font-size: 1rem;
+                font-weight: bold;
+            }
+            @keyframes increaseSize {
+            0% { font-size: 0.9em; }
+            50% { font-size: 0.4em; }
+            100% { font-size: 0.9em; }
+        }
+
+            .register-c {
+                font-size: 0.6rem;
+                width: 180px !important
+            }
+
             .image-footer {
                 width: 15vw
             }
@@ -192,6 +210,36 @@
             .footer {
                 margin-top: 16%;
             }
+        }
+        @media(min-width:992px) {
+            .navbar-brand {
+                position: relative;
+                z-index: 10;
+                margin: 0% 28% !important;
+            }
+
+            .navbar-nav {
+                margin-left: 20% !important;
+            }
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0b183f;
+            text-align: center;
+            font-weight: bold;
+            padding: 7% 5%;
+        }
+
+        .main h2,
+        .main a {
+            color: white;
+        }
+
+        .main a {
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -207,13 +255,13 @@
         </div>
         <!-- Spinner End -->
 
-        <div class="container bg-dark px-0">
+        <div class="container bg-dark px-0 nav-container">
             <div class="row gx-0" style="display: flex;align-items: center;">
                 <div class="col-lg-3 bg-dark d-none d-lg-block">
-                    <a href=""
-                        class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                    <a href="" class="navbar-brand w-100 h-100 p-0 d-flex align-items-center justify-content-center">
                         <img src="https://res.cloudinary.com/dxujeg5en/image/upload/v1694517858/DSA_Logo_New_udtixz.png"
                             class="image-logo" alt="Logo">
+                        <span style="margin-left: 3%;">Doctotrs Sports Academy</span>
                     </a>
                 </div>
                 <div class="col-lg-9">
@@ -221,6 +269,7 @@
                         <a href="" class="navbar-brand d-block d-lg-none">
                             <img src="https://res.cloudinary.com/dxujeg5en/image/upload/v1694517858/DSA_Logo_New_udtixz.png"
                                 class="image-logo" alt="Logo">
+                            <span class="mobile-title">Doctotrs Sports Academy</span>
                         </a>
                         <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
                             data-bs-target="#navbarCollapse">
@@ -233,18 +282,26 @@
                                 <a href="" class="nav-item nav-link">Games</a>
                                 <a href="" class="nav-item nav-link">Login</a>
                                 <a href="" class="nav-item nav-link">Register</a>
-                                <a href="/termsdpl" class="nav-item nav-link blink-zoom">Doctors Premier League Registration Starts</a>
+                                <!-- <a href="/termsdpl" class="nav-item nav-link blink-zoom">Doctors Premier League Registration Starts</a> -->
                             </div>
                         </div>
                     </nav>
                 </div>
-                
+
             </div>
         </div>
     </div>
 
 
+    <div class="container main">
+        <div class="row">
+            <h2>Doctors Premiere League Season 5</h2>
+            <a class="bg-success w-25 m-auto p-2 mt-4 register-c blink-zoom" href="/termsdpl">Click here to Register</a>
+        </div>
+    </div>
+
     <!-- Carousel Start -->
+    <!--
     <div class="container-fluid p-0 mb-5">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -318,11 +375,12 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </div>
+    </div>-->
     <!-- Carousel End -->
 
 
     <!-- Booking Start -->
+    <!--
     <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container">
             <div class="bg-white shadow" style="padding: 35px;">
@@ -339,7 +397,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <!-- Booking End -->
 
 
@@ -372,8 +430,9 @@
 
                             <p class="text-body mb-3"></p>
                             <div class="d-flex justify-content-between">
-                                <a class="d-flex align-items-center text-light btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book Now</a>
+                                <!-- <a class="d-flex align-items-center text-light btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a> -->
+                                <a href="/termsdpl" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Register
+                                    Now for DPL 5</a>
 
                             </div>
                         </div>
@@ -384,7 +443,7 @@
 
     </div>
     <!-- ground End -->
-
+    <!--
     <div class="container-fluid booking py-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container">
 
@@ -392,7 +451,7 @@
 
                 <div class="row g-2">
                     <div class="col-12 col-md-10 register">
-                        <!-- Your content here -->
+                       
                         <h2>Block Your Time To Refresh</h2>
                     </div>
                     <div class="col-12 col-md-2 book-btn">
@@ -402,7 +461,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+-->
 
     <section class="container px-md-5">
         <h1>Ground Highlights</h1>

@@ -22,7 +22,10 @@ const registrationSchema = new mongoose.Schema({
     previousSeasons: [String],
     playerProfile: String,
     specializedPosition: String,
+    type_of_batsmen:String,
+    hitter:String,
     typeOfBowler: String,
+    type_of_bowler_side:String,
     crichero:{
         type: String,
         required: false,

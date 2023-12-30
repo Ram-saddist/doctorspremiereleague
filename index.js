@@ -78,11 +78,13 @@ app.post('/register', upload.fields([
         previousSeasons: req.body.previous_seasons,
         playerProfile: req.body.player_profile,
         specializedPosition: req.body.specialized_position,
+        type_of_batsmen:req.body.type_of_batsmen,
+        hitter:req.body.hitter,
         typeOfBowler: req.body.type_of_bowler,
+        type_of_bowler_side:req.body.type_of_bowler_side,
         crichero: req.body.crichero,
         fileUploadPhoto: fileUploadPhoto ? '/uploads/' + fileUploadPhoto[0].filename : null,
         fileUploadPayment: fileUploadPayment ? '/uploads/' + fileUploadPayment[0].filename : null,
-        dietaryRestrictions: req.body.dietaryRestrictions,
         typeOfPayment: req.body.typeOfPayment,
         transactionId: req.body.transaction_id,
         transaction_date:req.body.transaction_date
@@ -108,13 +110,11 @@ app.post('/register', upload.fields([
 
 app.get('/dashboard', async (req, res) => {
     try {
-        // Retrieve all registrations from MongoDB
         const registrations = await Registration.find();
         console.log(registrations)
         res.render('dashboard', { registrations });
     } catch (error) {
         console.error(error);
-        //res.status(500).send('Internal Server Error');
     }
 });
 
