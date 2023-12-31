@@ -7,6 +7,9 @@ const app = express();
 const port = 8080;
 const Registration = require('./models/registrationModel');
 const nodemailer = require('nodemailer');
+const archiver = require('archiver');
+
+
 mongoose.connect("mongodb+srv://sivaram:sivaram@cluster0.0u7y0h0.mongodb.net/doctorspremierleague?retryWrites=true&w=majority")
     .then(() => {
         console.log("database connected successfully")
@@ -208,6 +211,34 @@ app.post('/confirm-email/:email', async (req, res) => {
         console.log("An error occurred while sending the email.");
     }
 });
+
+//for downloading the folders
+
+app.get('/archive', (req, res) => {
+    const actualPath = path.dirname(require.main.filename);
+    
+    const folderPath = path.join(actualPath, 'uploads');
+    const zipFilename = 'archive.zip';
+    console.log("actual pathhhhhhh",actualPath, folderPath)
+    const output = fs.createWriteStream(zipFilename);
+    const archive = archiver('zip', { zlib: { level: 9 } });
+
+    output.on('close', () => {
+        res.download(zipFilename, (err) => {
+            if (err) {
+                console.error(err);
+            }
+            fs.unlinkSync(zipFilename); 
+        });
+    });
+
+    archive.pipe(output);
+
+    archive.directory(folderPath, false);
+
+    archive.finalize();
+});
+
 
 
 // Start the server

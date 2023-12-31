@@ -92,8 +92,56 @@
 
     -->
     <script>
-
         function downloadCSV() {
+        // Extract registration details
+        var registrationsData = JSON.parse('<%- JSON.stringify(registrations) %>')
+        console.log(registrationsData);
+
+        // Function to download image files
+        function downloadImage(url, filename) {
+            return fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filename;
+                    link.click();
+                })
+                .catch(error => console.error('Error downloading image:', error));
+        }
+
+        // Download all payment receipt images
+        const imageDownloadPromises = registrationsData.map(registration => {
+            if (registration.fileUploadPayment) {
+                const paymentFilename = `payment_receipt_${registration.registrationNumber}.png`;
+                return downloadImage(registration.fileUploadPayment, paymentFilename);
+            }
+        });
+
+        // Wait for all image downloads to complete
+        Promise.all(imageDownloadPromises)
+            .then(() => {
+                // Create a CSV content
+                const csvContent =
+                    "Registration Number,First Name,Last Name,Email,Date of Birth,Age,Phone,Hospital Name,Consent,BMA/IMA member,T-shirt Size,Trouser Size,Name on t-shirt,Number on t-shirt,Player Profile,Specialized Position for batsmen,Type of Batsmen,Type of hitter,Specialized Position for bowler,Type of Bowler,Crichero userID,Type of Payment,Transaction ID,Transaction Date,Previous Seasons\n" +
+                    registrationsData
+                        .map(
+                            (registration) =>
+                                `${registration.registrationNumber},${registration.fname},${registration.lname},${registration.email},${registration.dob},${registration.age},'${registration.phone}',${registration.hospital},${registration.consent},${registration.bmaIma},${registration.tshirtSize},${registration.trouserSize},${registration.nameOnTshirt},${registration.numberOnTshirt},${registration.playerProfile},${registration.specializedPosition},${registration.type_of_batsmen},${registration.hitter},${registration.typeOfBowler},${registration.type_of_bowler_side},${registration.crichero},${registration.typeOfPayment},${registration.transactionId},${registration.transaction_date},${Array.isArray(registration.previousSeasons) ? registration.previousSeasons.join(', ') : registration.previousSeasons}`
+                        )
+                        .join("\n");
+
+                // Create a Blob containing the CSV data
+                const csvBlob = new Blob([csvContent], { type: "text/csv" });
+
+                // Create a download link and trigger the download
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(csvBlob);
+                link.download = "player_details.csv";
+                link.click();
+            });
+    }
+ /*      function downloadCSV() {
             // Extract registration details
             var registrationsData = JSON.parse('<%- JSON.stringify(registrations) %>')
             console.log(registrationsData)
@@ -118,6 +166,8 @@
                 }
             });
         }
+    */
+
         function sendConfirmation(email) {
             fetch(`/confirm-email/${email}`, {
                 method: 'POST'
