@@ -190,9 +190,9 @@ app.post('/confirm-email/:email', async (req, res) => {
         
         `
         const mailOptions = {
-            from: "sivaram@codegnan.com", // Sender address
+            from: "doctorspremierleagueseason5@gmail.com", // Sender address
             to: email, // Recipient address
-            subject: "Acceptance of Booking", // Subject line
+            subject: "Confirmation of Registration", // Subject line
             html: text
         };
 
