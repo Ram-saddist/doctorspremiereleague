@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const fs = require('fs');
 const app = express();
-const port = 3000;
+const port = 8080;
 const Registration = require('./models/registrationModel');
 const nodemailer = require('nodemailer');
 mongoose.connect("mongodb+srv://sivaram:sivaram@cluster0.0u7y0h0.mongodb.net/doctorspremierleague?retryWrites=true&w=majority")
