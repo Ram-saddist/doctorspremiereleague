@@ -30,8 +30,9 @@
             .dboard {
                 flex-direction: column;
             }
-            .btn-success{
-                width:fit-content
+
+            .btn-success {
+                width: fit-content
             }
         }
     </style>
@@ -99,7 +100,7 @@
             // Create a CSV content 
             const csvContent = "Registration Number,First Name,Last Name,Email,Date of Birth,Age,Phone,Hospital Name,Consent,BMA/IMA member,T-shirt Size,Trouser Size,Name on t-shirt,Number on t-shirt,Player Profile,Specialized Position for batsmen,Type of Batsmen,Type of hitter,Specialized Position for bowler,Type of Bowler,Crichero userID,Type of Payment,Transaction ID,Transaction Date,Previous Seasons\n"
                 + registrationsData.map(registration => (
-                    `${registration.registrationNumber},${registration.fname},${registration.lname},${registration.email},${registration.dob}${registration.age},'${registration.phone}',${registration.hospital},${registration.consent},${registration.bmaIma},${registration.tshirtSize},${registration.trouserSize},${registration.nameOnTshirt},${registration.numberOnTshirt},${registration.playerProfile},${registration.specializedPosition},${registration.type_of_batsmen},${registration.hitter},${registration.typeOfBowler},${registration.type_of_bowler_side},${registration.crichero},${registration.typeOfPayment},${registration.transactionId},${registration.transaction_date},${registration.previousSeasons}`
+                    `${registration.registrationNumber},${registration.fname},${registration.lname},${registration.email},${registration.dob},${registration.age},'${registration.phone}',${registration.hospital},${registration.consent},${registration.bmaIma},${registration.tshirtSize},${registration.trouserSize},${registration.nameOnTshirt},${registration.numberOnTshirt},${registration.playerProfile},${registration.specializedPosition},${registration.type_of_batsmen},${registration.hitter},${registration.typeOfBowler},${registration.type_of_bowler_side},${registration.crichero},${registration.typeOfPayment},${registration.transactionId},${registration.transaction_date},${Array.isArray(registration.previousSeasons) ? registration.previousSeasons.join(', ') : registration.previousSeasons}`
                 )).join("\n");
 
             // Create a Blob containing the CSV data
@@ -110,6 +111,12 @@
             link.href = URL.createObjectURL(csvBlob);
             link.download = "player_details.csv";
             link.click();
+            registrationsData.forEach(registration => {
+                if (registration.fileUploadPayment) {
+                    const filename = `payment_receipt_${registration.registrationNumber}.png`;
+                    downloadImage(registration.fileUploadPayment, filename);
+                }
+            });
         }
         function sendConfirmation(email) {
             fetch(`/confirm-email/${email}`, {

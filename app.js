@@ -133,8 +133,8 @@ app.post('/confirm-email/:email', async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: "sivaram@codegnan.com", // Your Gmail email address
-                pass: "ypvbrngksqwljnsj", // Your Gmail password
+                user: "doctorspremierleagueseason5@gmail.com", // Your Gmail email address
+                pass: "aquskzzzdbrxkhtq", // Your Gmail password
             },
         });
         transporter
