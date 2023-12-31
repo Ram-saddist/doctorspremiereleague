@@ -10,7 +10,7 @@ const nodemailer = require('nodemailer');
 const archiver = require('archiver');
 
 
-mongoose.connect("mongodb+srv://sivaram:sivaram@cluster0.0u7y0h0.mongodb.net/doctorspremierleague?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://doctorspremierleagueseason5:doctorspremierleagueseason5@dsadpl.fa6wr0a.mongodb.net/doctorspremierleague?retryWrites=true&w=majority")
     .then(() => {
         console.log("database connected successfully")
     })
