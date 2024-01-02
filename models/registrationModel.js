@@ -35,7 +35,8 @@ const registrationSchema = new mongoose.Schema({
     fileUploadPayment: String,
     typeOfPayment: String,
     transactionId: String,
-    transaction_date:String
+    transaction_date:String,
+    acceptance:String
 });
 
 // Create a model using the schema
